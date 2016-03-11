@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>jTravel >Buscar viajes</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+	<link rel="stylesheet" type="text/css" href="css/fontello.css"/>
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+<body>
+	<input type="checkbox" class="checkbox" id="menu-toogle"/>
+	<label for="menu-toogle"><span></span></label>
+	<div id="banner">
+		<img src="img/logotipo.png" height="100" width="100" alt="Logotipo de la pagina">
+		<h1>jTravel</h1>
+		<h3>The Experience</h3>
+	</div>
+	<main class="login centrado">
+	<fieldset>
+    <legend>Crear viaje</legend>
+			<header>
+				<h1>Busca tu viaje</h1>
+			</header>
+			<form>
+				<label for="titulo">Título:</label><br/><input type="text" name="titulo" id="titulo"  class="input" required title="Necesita un título" />
+				<br/>			
+				<label for="autor">Autor:</label><br/><input type="text" name="titulo" id="autor"  class="input" required title="Necesita un título" />
+				<br/>			
+
+				<label for="fecha_desde">Fecha desde:</label><br/><input type="text" title="DD/MM/AAAA" placeholder="DD/MM/AAAA" name="fecha_desde" id="fecha_desde"  class="input" />
+				<br/>
+				<label for="fecha_hasta">Fecha hasta:</label><br/><input title="DD/MM/AAAA" placeholder="DD/MM/AAAA" type="text" name="fecha_hasta" id="fecha_hasta"  class="input" />
+				<br/>
+				<label for="descripcion">Descripción:</label><br/><textarea name="descripcion" id="descripcion"  class="input" ></textarea>
+				<br/>
+				Valoración<br/>
+				<div class="valoracion">
+					<aside class="estrellas">
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+					</aside>
+				</div>
+
+				<div class="valoracion">
+					<aside class="estrellas">
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+						<span class="icon-star"></span>
+					</aside>
+				</div>
+
+				<input type="submit" value="Busca"/>
+			</form>
+	</fieldset>
+	</main>
+
+	<nav id="menu">
+		<h3>Menu Despegable</h3>
+		<ul>
+			<li><a href="index.html">Inicio</a></li>
+			<li><a href="buscar_viajes.html">Buscar Viaje</a></li>
+			<li><a href="crear_viaje.html">Crear Viaje</a></li>
+			<li><a href="registro.html">Registro</a></li>
+			<li><a href="login.html">Login</a></li>
+			<li><a href="acerca.html">Nosotros</a></li>
+		</ul>
+	</nav>
+	<main>
+	<section>
+		<article>
+			<header>
+				<h4>El mejor destino: Marruecos</h4>
+			</header>
+			<img src="img/prueba.jpg" alt=""/>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+			<br/>
+			<div class="valoracion">
+				<aside class="estrellas">
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+				</aside>
+			</div>
+			<br/>
+			<a href="viaje.html"><b>Seguir Leyendo</b>&nbsp;-></a>
+			<footer>
+				<h6>Autor:Jose Manuel, Fecha de edicion:<time datetime="2016">2016</time></h6>
+			</footer>
+		</article>
+		<article>
+			<header>
+				<h4>Un Viaje Inolvidable: Shan-grila</h4>
+			</header>
+			<img src="img/prueba2.jpg" alt=""/>
+			<p>Distinctio ea non expedita molestiae perferendis iusto, eveniet.</p>
+			<br/>
+			<div class="valoracion">
+				<aside class="estrellas">
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+				</aside>
+			</div>
+			<br/>
+			<a href="viaje.html"><b>Seguir Leyendo</b>&nbsp;-></a>
+			<footer>
+				<h6>Autor:Jose Vicente y Jose Manuel, Fecha de edicion:<time datetime="2016">2016</time></h6>
+			</footer>
+		</article>
+		<article>
+			<header>
+				<h4>Un pais de Tradiciones: China</h4>
+			</header>
+			<img src="img/prueba.jpg" alt=""/>
+			<p>Fugit animi iusto dolore alias, illum enim aspernatur?</p>
+			<br/>
+			<div class="valoracion">
+				<aside class="estrellas">
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+				</aside>
+			</div>
+			<br/>
+			<a href="viaje.html"><b>Seguir Leyendo</b>&nbsp;-></a>
+			<footer>
+				<h6>Autor:Jose Vicente, Fecha de edicion:<time datetime="2016">2016</time></h6>
+			</footer>
+		</article>
+		<article>
+			<header>
+				<h4>El pais del Anime: Japon</h4>
+			</header>
+			<img src="img/prueba.jpg" alt=""/>
+			<p>Sed, debitis pariatur cupiditate consequatur laboriosam necessitatibus hic!</p>
+			<br/>
+			<div class="valoracion">
+				<aside class="estrellas">
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+				</aside>
+			</div>
+			<br/>
+			<a href="viaje.html"><b>Seguir Leyendo</b>&nbsp;-></a>
+			<footer>
+				<h6>Autor:Jose Manuel, Fecha de edicion:<time datetime="2016">2016</time></h6>
+			</footer>
+		</article>
+		<article>
+			<header>
+				<h4>Haz el reto: El himalaya</h4>
+			</header>
+			<img src="img/prueba.jpg" alt=""/>
+			<p>Deserunt dolore, repellat incidunt quam. Reprehenderit, eius, alias!</p>
+			<br/>
+			<div class="valoracion">
+				<aside class="estrellas">
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+					<span class="icon-star"></span>
+				</aside>
+			</div>
+			<br/>
+			<a href="viaje.html"><b>Seguir Leyendo</b>&nbsp;-></a>
+			<footer>
+				<h6>Autor:Jose Vicente, Fecha de edicion:<time datetime="2016">2016</time></h6>
+			</footer>
+		</article>
+	</section>
+	</main>
+	<footer class="footer">
+	<p>
+		<span>jTravel&copy;</span>
+		<time datetime="2016">2016</time>
+	</p>
+	</footer>
+</body>
+</html>
+
