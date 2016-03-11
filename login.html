@@ -8,6 +8,7 @@
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<script type="text/javascript" src="/js/login.js"></script>
 </head>
 <body>
 	<input type="checkbox" class="checkbox" id="menu-toogle"/>
@@ -35,7 +36,7 @@
 				<h1>Login</h1>
 			</header>
 			<p>Desde esta zona se puede logear, debe estar registrado antes.</p>
-			<form>
+			<form onsubmit="return entrar();">
 				<label for="userlogin">Usuario:</label><br/><input type="text" name="userlogin" id="userlogin"  class="input" pattern="[a-zA-Z]{1}[a-zA-Z0-9]*" required autofocus/>
 				<br/>
 				<label  for="password">Contraseña:</label><br/><input type="password" name="password" id="password" class="input" pattern="[a-zA-Z0-9]+" required />
