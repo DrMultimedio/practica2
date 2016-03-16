@@ -46,6 +46,28 @@ function peticionAJAX_GET(url,u,p)
 }
 
 
+function procesarCambio()
+{
+	alert(obj.readyState);
+	if(obj.readyState == 4)
+	{ 
+		// valor 4: respuesta recibida y lista para ser procesada
+		if(obj.status == 200)
+		{ 
+			// El valor 200 significa "OK"
+			// Aquí se procesa lo que se haya devuelto:
+			console.log("se ha terminado la carga de datos -> devolviendo");
+			document.getElementById("devuelto").innerHTML = obj.responseText+"\n Login correcto";
+		}
+		else 
+		{
+			console.warn("no se ha podido completar la peticion html");
+			alert("Hubo un problema con los datos devueltos"); // ERROR
+		}
+	}
+}
+
+
 function peticionAJAX_POST(url) 
 {
 	obj = crearObjAjax();
@@ -54,41 +76,21 @@ function peticionAJAX_POST(url)
 		// Si se ha creado el objeto, se completa la petición ...
 		// Argumentos:
 		console.log("se empieza a procesar la peticion");
-		if(url == "/practica2/rest/post/login/")
+		if(url == "/practica2/rest/post/login.php")
 		{
 			console.log("la peticion es de caracter login");
 			var login = document.getElementById("userlogin").value;
 			var pass = document.getElementById("password").value;
 		}
 		var args = "login=" + login + "&pwd=" + pass;
-		args += "&v=" + (new Date()).getTime(); // Truco: evita utilizar la cache
+		//args += "&v=" + (new Date()).getTime(); // Truco: evita utilizar la cache
 		// Se establece la función (callback) a la que llamar cuando cambie el estado:
-		obj.onreadystatechange = procesarCambio(url); // función callback: procesarCambio
+		obj.onreadystatechange = procesarCambio; // función callback: procesarCambio
 		obj.open("POST", url, true); // Se crea petición POST a url, asíncrona("true")
 		// Es necesario especificar la cabecera "Content-type" para peticiones POST
 		obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		obj.send(args); // Se envía la petición
 		console.log("se termina de procesar la informacion");
 		return false;
-	}
-}
-
-function procesarCambio(url)
-{
-	if(obj.readyState == 4)
-	{ 
-		// valor 4: respuesta recibida y lista para ser procesada
-		if(obj.status == 200)
-		{ 
-			// El valor 200 significa "OK"
-			// Aquí se procesa lo que se haya devuelto:
-			console.log("se ha terminado la carga de datos");
-			document.getElementById("devuelto").innerHTML = obj.responseText;
-		}
-		else 
-		{
-			console.warn("no se ha podido completar la peticion html");
-			alert("Hubo un problema con los datos devueltos"); // ERROR
-		}
 	}
 }

@@ -37,7 +37,7 @@
 				<h1>Login</h1>
 			</header>
 			<p>Desde esta zona se puede logear, debe estar registrado antes.</p>
-			<form onsubmit="return peticionAJAX_POST('/practica2/rest/post/login/');">
+			<form onsubmit="return peticionAJAX_POST('/practica2/rest/post/login.php');">
 				<label for="userlogin">Usuario:</label><br/><input type="text" name="userlogin" id="userlogin"  class="input" pattern="[a-zA-Z]{1}[a-zA-Z0-9]*" required autofocus/>
 				<br/>
 				<label  for="password">Contraseña:</label><br/><input type="password" name="password" id="password" class="input" pattern="[a-zA-Z0-9]+" required />
