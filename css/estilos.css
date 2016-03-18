@@ -304,7 +304,35 @@ article .valoracion span:hover ~ span{
 	font-style: italic;
 	font-size: 0.5em;
 }
+/*pantalla zoom*/
+.zoom
+{
+	z-index: -10;
+	position:absolute;
+	transition:all .5s ease;
+	height: 100%;
+	width:100%;
+	max-height:100%;
+	max-width:100%;
+	opacity: 0;
+}
 
+.zoom_visible
+{
+	z-index: 10;
+	opacity: 0.5;
+	background-color: black;
+	left:0;
+	bottom:0;
+}
+
+.bloqueo
+{
+	overflow-x:hidden;
+	overflow-y:hidden;
+	margin:0 0 0 0;
+	padding: 0 0 0 0; 
+}
 /*media querys*/
 @media (min-width: 550px) {
 	section

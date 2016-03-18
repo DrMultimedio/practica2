@@ -1,13 +1,5 @@
 var obj; // variable global que guarda el objeto XMLHttpRequest
 
-function entrar(formulario)
-{
-	usu = formulario.userlogin.value;
-	pass = formulario.password.value;
-	peticionAJAX_GET("/practica2/rest/get/login.php",usu,pass);
-	return false;
-}
-
 function crearObjAjax()
 {
 	var xmlhttp;
@@ -48,7 +40,24 @@ function peticionAJAX_GET(url,u,p)
 
 function procesarCambio()
 {
-	alert(obj.readyState);
+	/**
+	if(obj.readyState == 1)
+	{
+		document.getElementById("devuelto").innerHTML = "<progress value='25' max='100'></progress> ";
+	}
+	else if(obj.readyState == 2)
+	{
+		document.getElementById("devuelto").inne75TML = "<progress value='50' max='100'></progress> ";	
+	}
+	else if(obj.readyState == 3)
+	{
+		document.getElementById("devuelto").innerHTML = "<progress value='75' max='100'></progress> ";		
+	}
+	else if(obj.readyState == 4)
+	{
+		document.getElementById("devuelto").innerHTML = "<progress value='100' max='100'></progress> ";		
+	}
+	**/
 	if(obj.readyState == 4)
 	{ 
 		// valor 4: respuesta recibida y lista para ser procesada
@@ -57,12 +66,15 @@ function procesarCambio()
 			// El valor 200 significa "OK"
 			// Aquí se procesa lo que se haya devuelto:
 			console.log("se ha terminado la carga de datos -> devolviendo");
-			document.getElementById("devuelto").innerHTML = obj.responseText+"\n Login correcto";
+			usuario =JSON.parse(obj.responseText);
+			document.getElementById("devuelto").innerHTML = "Login correcto, redirecionando......";
+			zoom_activo();
 		}
 		else 
 		{
 			console.warn("no se ha podido completar la peticion html");
-			alert("Hubo un problema con los datos devueltos"); // ERROR
+			document.getElementById("devuelto").innerHTML = "Login Incorrecto revise sus datos.";
+			zoom_activo();
 		}
 	}
 }
@@ -92,5 +104,23 @@ function peticionAJAX_POST(url)
 		obj.send(args); // Se envía la petición
 		console.log("se termina de procesar la informacion");
 		return false;
+	}
+}
+
+function zoom_activo()
+{
+	ventana = document.getElementById('zoo');
+	alert("entra");
+	if(!ventana.classList.contains('zoom_visible'))
+	{
+		document.body.scrollTop = 0;
+		ventana.classList.add('zoom_visible');
+		document.body.classList.add('bloqueo');
+	}
+	else
+	{
+		alert("no funcciona");
+		ventana.classList.remove('zoom_visible');
+		document.body.classList.remove('bloqueo');
 	}
 }
