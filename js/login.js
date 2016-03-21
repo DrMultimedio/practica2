@@ -65,18 +65,19 @@ function procesarCambio()
 		{ 
 			// El valor 200 significa "OK"
 			// Aquí se procesa lo que se haya devuelto:
-			console.log("se ha terminado la carga de datos -> devolviendo");
-			usuario =JSON.parse(obj.responseText);
-			sessionStorage.setItem("login_session",obj.responseText);
-			document.getElementById("devuelto").innerHTML = "Login correcto, redirecionando......";
-			zoom_activo(2);
-			setTimeout("redireccion_auto()",3*1000); 
+			console.log("se ha terminado la carga de datos -> devolviendo");//devolvemos mensaje por log
+			usuario =JSON.parse(obj.responseText);//creamos el objeto usuario con los datos parseados
+			sessionStorage.setItem("login_session",obj.responseText);//creamos la sessionstorage
+			document.getElementById("devuelto").innerHTML = "Login correcto, redirecionando......";//lo escribimos por si falla el slider
+			zoom_activo(2,usuario.ULTIMO_ACCESO);//activamos el slider, 2 significa que muestre el mensaje de que ha funcionado correctamente
+			comprobar_check();//comprobamos si el check esta pulsado
+			setTimeout("redireccion_auto()",3*1000); //cuando pasan 3 segundos se redirecciona al index
 		}
 		else 
 		{
-			console.warn("no se ha podido completar la peticion html");
-			document.getElementById("devuelto").innerHTML = "Login Incorrecto revise sus datos.";
-			zoom_activo();
+			console.warn("no se ha podido completar la peticion html");//devolvemos mensaje por log
+			document.getElementById("devuelto").innerHTML = "Login Incorrecto revise sus datos.";//lo escribimos por si falla el slider
+			zoom_activo();//activamos el slider sin opcion que significa que ha ido mal
 		}
 	}
 }
@@ -109,7 +110,7 @@ function peticionAJAX_POST(url)
 	}
 }
 
-function zoom_activo(modo)
+function zoom_activo(modo,fecha)
 {
 	ventana = document.getElementById('zoo');
 	mensaje = document.getElementById('mensaje');
@@ -118,7 +119,7 @@ function zoom_activo(modo)
 		subir();
 		if(modo == 2)
 		{
-			mensaje.innerHTML = "<h2 style='color:green;'>Se ha logeado correctamente</h2><h4>Sera redireccionado automaticamente</h4>";
+			mensaje.innerHTML = "<h2 style='color:green;'>Se ha logeado correctamente</h2><h4>Sera redireccionado automaticamente</h4><h6>Ultimo Acceso:"+fecha+"</h6>";
 		}
 		else
 		{
@@ -156,9 +157,34 @@ function arranque_personalizado()
 			//si esta logueado
 			redireccion();
 		}
+		compro_recordar();
 }
 //redirecciona
 function redireccion_auto()
 {
 	document.location.href="index.html";
+}
+//comprobamos si esta en check el recordar si lo esta creamos un localstorage
+function comprobar_check(informacion)
+{
+	if(document.getElementById("recordar").checked)//si pasa esta check
+	{
+		console.log("si esta en check recuerdo");
+		localStorage.setItem("login_local",obj.responseText);
+	}
+	else
+	{
+		console.log("No esta en check recuerdo");
+		localStorage.removeItem("login_local");
+	}
+}
+//comprobamos al principio si existe login_local si existe agregamos los datos a donde pertenezcan 
+function compro_recordar()
+{
+	if(localStorage.getItem("login_local"))
+	{
+		user=JSON.parse(localStorage.getItem("login_local"));
+		document.getElementById("userlogin").value=user.LOGIN;
+		document.getElementById("recordar").checked=true;
+	}
 }
