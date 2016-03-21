@@ -295,6 +295,21 @@ article .valoracion span:hover ~ span{
 .input:hover{
   box-shadow: 1px 1px 5px rgba(103, 144, 173, 1);
 }
+#fPerfil{
+	max-height:200px;
+	max-width:200px;
+}
+/*mensajes de validación*/
+#no{
+	transition:0.1s;
+	color:#D60D0D;
+	display:none;
+}
+#maxTam{
+
+}
+/*fin de mensajes de validación*/
+
 /*Fin de campos de formulario*/
 
 /*fecha de los comentarios*/
