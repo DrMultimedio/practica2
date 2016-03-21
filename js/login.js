@@ -70,6 +70,7 @@ function procesarCambio()
 			sessionStorage.setItem("login_session",obj.responseText);
 			document.getElementById("devuelto").innerHTML = "Login correcto, redirecionando......";
 			zoom_activo(2);
+			setTimeout("redireccion_auto()",3*1000); 
 		}
 		else 
 		{
@@ -133,6 +134,7 @@ function zoom_activo(modo)
 	}
 }
 
+//hace el efecto slider hacia arriba
 var arriba;
 function subir() 
 {
@@ -145,4 +147,18 @@ function subir()
 	{
 		clearTimeout(arriba);
 	}
+}
+//nos redirecciona automaticamente cuando cargamos la pagina y estamos logeados
+function arranque_personalizado()
+{
+		if(sessionStorage.getItem("login_session"))
+		{
+			//si esta logueado
+			redireccion();
+		}
+}
+//redirecciona
+function redireccion_auto()
+{
+	document.location.href="index.html";
 }
