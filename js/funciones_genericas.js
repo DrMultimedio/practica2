@@ -71,4 +71,41 @@ function cerrar()
 	redireccion();
 }
 
-function redireccion() { document.location.href="index.html";}
+function redireccion() 
+{ 
+	document.location.href="index.html";
+}
+
+//creamos el objeto de session compatible con el navegador
+function crearObjAjax()
+{
+	var xmlhttp;
+	if(window.XMLHttpRequest) 
+	{ 
+		// Objeto nativo
+		xmlhttp= new XMLHttpRequest(); // Se obtiene el nuevo objeto
+		console.log("Detectado tipo de protocolo: estandar");
+	} 
+	else if(window.ActiveXObject) 
+	{ 
+		// IE(Windows): objectoActiveX
+		xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
+		console.log("Detectado tipo de protocolo: windows");
+	}
+	return xmlhttp;
+}
+
+//hace el efecto slider hacia arriba
+var arriba;
+function subir() 
+{
+	if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) 
+	{
+		window.scrollBy(0, -15);
+		arriba = setTimeout('subir()', 10);
+	}
+	else
+	{
+		clearTimeout(arriba);
+	}
+}

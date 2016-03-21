@@ -1,43 +1,5 @@
 var obj; // variable global que guarda el objeto XMLHttpRequest
 
-function crearObjAjax()
-{
-	var xmlhttp;
-	if(window.XMLHttpRequest) 
-	{ 
-		// Objeto nativo
-		xmlhttp= new XMLHttpRequest(); // Se obtiene el nuevo objeto
-		console.log("Detectado tipo de protocolo: estandar");
-	} 
-	else if(window.ActiveXObject) 
-	{ 
-		// IE(Windows): objectoActiveX
-		xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
-		console.log("Detectado tipo de protocolo: windows");
-	}
-	return xmlhttp;
-}
-
-
-
-function peticionAJAX_GET(url,u,p) 
-{
-	obj= crearObjAjax();
-	if(obj) 
-	{ 
-		// Si se ha creado el objeto, se completa la petición ...
-		var login= u; // Se preparan los
-		var pass= p; // argumentos ...
-		url+= "?l=" + login+ "&p=" + pass; // se añaden los argumentos a la url
-		url+= "&v=" + (new Date()).getTime(); // Truco: evita utilizar la cache
-		// Se establece la función (callback) a la que llamar cuando cambie el estado:
-		obj.onreadystatechange= procesarCambio; // función callback: procesarCambio
-		obj.open("GET", url, true); // Se crea petición GET a url, asíncrona ("true")
-		obj.send(); // Se envía la petición
-	}
-}
-
-
 function procesarCambio()
 {
 	/**
@@ -135,20 +97,6 @@ function zoom_activo(modo,fecha)
 	}
 }
 
-//hace el efecto slider hacia arriba
-var arriba;
-function subir() 
-{
-	if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) 
-	{
-		window.scrollBy(0, -15);
-		arriba = setTimeout('subir()', 10);
-	}
-	else
-	{
-		clearTimeout(arriba);
-	}
-}
 //nos redirecciona automaticamente cuando cargamos la pagina y estamos logeados
 function arranque_personalizado()
 {
