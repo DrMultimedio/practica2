@@ -67,8 +67,9 @@ function procesarCambio()
 			// Aquí se procesa lo que se haya devuelto:
 			console.log("se ha terminado la carga de datos -> devolviendo");
 			usuario =JSON.parse(obj.responseText);
+			sessionStorage.setItem("login_session",obj.responseText);
 			document.getElementById("devuelto").innerHTML = "Login correcto, redirecionando......";
-			zoom_activo();
+			zoom_activo(2);
 		}
 		else 
 		{
@@ -107,20 +108,41 @@ function peticionAJAX_POST(url)
 	}
 }
 
-function zoom_activo()
+function zoom_activo(modo)
 {
 	ventana = document.getElementById('zoo');
-	alert("entra");
+	mensaje = document.getElementById('mensaje');
 	if(!ventana.classList.contains('zoom_visible'))
 	{
-		document.body.scrollTop = 0;
+		subir();
+		if(modo == 2)
+		{
+			mensaje.innerHTML = "<h2 style='color:green;'>Se ha logeado correctamente</h2><h4>Sera redireccionado automaticamente</h4>";
+		}
+		else
+		{
+			mensaje.innerHTML = "<h2 style='color:red;'>Error</h2><h4>Recuerde que puede contener mayusculas,numeros y simbolos su password.</h4><button onclick='zoom_activo();'>Vale</button>";
+		}
 		ventana.classList.add('zoom_visible');
 		document.body.classList.add('bloqueo');
 	}
 	else
 	{
-		alert("no funcciona");
 		ventana.classList.remove('zoom_visible');
 		document.body.classList.remove('bloqueo');
+	}
+}
+
+var arriba;
+function subir() 
+{
+	if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) 
+	{
+		window.scrollBy(0, -15);
+		arriba = setTimeout('subir()', 10);
+	}
+	else
+	{
+		clearTimeout(arriba);
 	}
 }

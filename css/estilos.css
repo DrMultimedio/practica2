@@ -320,7 +320,7 @@ article .valoracion span:hover ~ span{
 .zoom_visible
 {
 	z-index: 10;
-	opacity: 0.5;
+	opacity: 0.95;
 	background-color: black;
 	left:0;
 	bottom:0;
@@ -332,6 +332,19 @@ article .valoracion span:hover ~ span{
 	overflow-y:hidden;
 	margin:0 0 0 0;
 	padding: 0 0 0 0; 
+}
+
+.mensaje
+{
+	text-align: center;
+	width:50%;
+	height: auto;
+	position: absolute;
+	background-color: white;
+	opacity: 1;
+	top:25%;
+	left:25%;
+	font-size: 0.8em;
 }
 /*media querys*/
 @media (min-width: 550px) {
