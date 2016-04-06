@@ -18,7 +18,7 @@ if($METODO<>'GET') exit();
 // =================================================================================
 $RECURSO = array();
 $RECURSO = explode("/", $_GET['prm']);
-$PARAMS = array_slice($_GET, 1, count($_GET) - 1,true);
+$PARAMS = array_slice($_GET, 1, (count($_GET)-1),true);
 $ID = $RECURSO[0];
 // =================================================================================
 // CONFIGURACION DE SALIDA JSON Y CORS PARA PETICIONES AJAX
@@ -44,10 +44,10 @@ else
 	{ // se piden todos los comentarios de un viaje
 		$mysql = 'select * from comentario where ID_VIAJE=' . sanatize($PARAMS['id_viaje']) . ' order by FECHAHORA desc';
 	}
-  elseif(isset($PARAMS['u']) && is_numeric($PARAMS['u']))
-  {
-    $mysql = 'select c.*,v.NOMBRE as NOMBRE_VIAJE from comentario c, viaje v where c.ID_VIAJE=v.ID order by FECHAHORA desc LIMIT 0,' . sanatize($PARAMS['u']);
-  }
+	elseif(isset($PARAMS['u']) && is_numeric($PARAMS['u']))
+	{
+		$mysql = 'select c.*,v.NOMBRE as NOMBRE_VIAJE from comentario c, viaje v where c.ID_VIAJE=v.ID order by FECHAHORA desc LIMIT 0,' . sanatize($PARAMS['u']);
+	}
 	else
 	{
 		$RESPONSE_CODE = 400; // Los parámetros no son correctos
