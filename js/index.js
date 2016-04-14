@@ -3,7 +3,7 @@ var obj2;//contiene instancia de ajax comentarios
 var viajes="nada";//contiene los viajes cargados
 var comentarios="nada";//contiene los comentarios cargados 
 
-function peticionAJAX_GET(url) //peticion para ajac de comentario
+function peticionAJAX_GET(url) //peticion para ajax de comentario
 {
 	obj= crearObjAjax();
 	if(obj) 
@@ -115,6 +115,7 @@ function foormatear_entradas(a)
 		valor4=valor4+"</div><br/><footer><h6>Autor:"+usu+", Fecha de edicion:<time datetime='2016'>"+feinicio+"</time></h6></footer>";
 		articulo.innerHTML=valor4;
 		nodo.appendChild(articulo);
+		console.log("monstrando entradas");
 	}
 }
 
@@ -122,6 +123,10 @@ function foormatear_entradas(a)
 function foormatear_comentarios(b)
 {
 	nodo2=document.getElementById("come");//nodo div de index
+	while(nodo2.hasChildNodes())//con esto eliminamos todos los comentarios que hayan antes
+	{
+		nodo2.removeChild(nodo2.firstChild);	
+ 	}
 	//vamos a contar cuantos viajes hay
 	for (var t = b.FILAS.length - 1; t >= 0; t--) 
 	{
@@ -139,4 +144,5 @@ function foormatear_comentarios(b)
 		articulo2.innerHTML="<span>"+usuc+" -> </span>"+texto+"<span class='fecha_comentarios'><time datetime='"+fecha+"'>"+fecha+"</time></span>";
 		nodo2.appendChild(articulo2);
 	}
+	console.log("monstrando comentarios");
 }

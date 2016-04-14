@@ -324,7 +324,7 @@ article .valoracion span:hover ~ span{
 {
 	z-index: -10;
 	position:absolute;
-	transition:all .5s ease;
+	transition:all .1s ease;
 	height: 100%;
 	width:100%;
 	max-height:100%;
