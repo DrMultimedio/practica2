@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="/practica2/js/funciones_genericas.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
-<body onload="arranque();">
+<body onload="arranque();run_p();">
 	<input type="checkbox" class="checkbox" id="menu-toogle"/>
 	<label for="menu-toogle"><span></span></label>
 	<div id="banner">
@@ -25,10 +25,10 @@
 			<header>
 				<h1>Busca tu viaje</h1>
 			</header>
-			<form>
+			<form method="GET" onsubmit="return buscar();">
 				<label for="titulo">Título:</label><br/><input type="text" name="titulo" id="titulo"  class="input" required title="Necesita un título" />
 				<br/>			
-				<label for="autor">Autor:</label><br/><input type="text" name="titulo" id="autor"  class="input" required title="Necesita un título" />
+				<label for="autor">Autor:</label><br/><input type="text" name="autor" id="autor"  class="input" required title="Necesita un título" />
 				<br/>			
 
 				<label for="fecha_desde">Fecha desde:</label><br/><input type="text" title="DD/MM/AAAA" placeholder="DD/MM/AAAA" name="fecha_desde" id="fecha_desde"  class="input" />
@@ -39,22 +39,22 @@
 				<br/>
 				Valoración<br/>
 				<div class="valoracion">
-					<aside class="estrellas">
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
+					<aside class="estrellas" id="es_1">
+						<span class="icon-star" onclick="desde(1);"></span>
+						<span class="icon-star" onclick="desde(2);"></span>
+						<span class="icon-star" onclick="desde(3);"></span>
+						<span class="icon-star" onclick="desde(4);"></span>
+						<span class="icon-star" onclick="desde(5);"></span>
 					</aside>
 				</div>
 
 				<div class="valoracion">
-					<aside class="estrellas">
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
+					<aside class="estrellas" id="es_2">
+						<span class="icon-star" onclick="hasta(1);"></span>
+						<span class="icon-star" onclick="hasta(2);"></span>
+						<span class="icon-star" onclick="hasta(3);"></span>
+						<span class="icon-star" onclick="hasta(4);"></span>
+						<span class="icon-star" onclick="hasta(5);"></span>
 					</aside>
 				</div>
 
@@ -76,7 +76,7 @@
 			<li><a href="#" onclick="cerrar();">Cerrar Sesion</a></li>
 		</ul>
 	</nav>
-	<main>
+	<!--<main>
 	<section>
 		<article>
 			<header>
@@ -189,7 +189,7 @@
 			</footer>
 		</article>
 	</section>
-	</main>
+	</main>-->
 	<footer class="footer">
 	<p>
 		<span>jTravel&copy;</span>
