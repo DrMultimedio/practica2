@@ -3,11 +3,13 @@ var id_viaje="";
 var viaje="";
 var comenta="";
 var fotos="";
-
+var comentario_ancla="";
 function arranque_personalizado()
 {
 	console.log("ejecutando arranque personalizado para viajes, vamos a recuperar el id del viaje");
-	var loc = document.location.href;
+	expresion=/#\w+/;
+	comentario_ancla=document.location.href.match(expresion);
+	var loc = document.location.href.replace(expresion,'');
     if(loc.indexOf('?') > 0)
     {
     	console.log('existen argumentos');
@@ -250,7 +252,7 @@ function foormatear_comentarios()
 		comentarios_realizados="";
 		for(a=0;a < comenta.FILAS.length;a++) 
 		{
-			comentarios_realizados=comentarios_realizados+'<p><span>'+comenta.FILAS[a].LOGIN+'</span><b>'+comenta.FILAS[a].TITULO+'</b> '+comenta.FILAS[a].TEXTO+'<span class="fecha_comentarios"><time datetime="'+comenta.FILAS[a].FECHAHORA+'">'+comenta.FILAS[a].FECHAHORA+'</time></span></p>';
+			comentarios_realizados=comentarios_realizados+'<p id="comentario'+comenta.FILAS[a].ID+'"><span>'+comenta.FILAS[a].LOGIN+'</span><b>'+comenta.FILAS[a].TITULO+'</b> '+comenta.FILAS[a].TEXTO+'<span class="fecha_comentarios"><time datetime="'+comenta.FILAS[a].FECHAHORA+'">'+comenta.FILAS[a].FECHAHORA+'</time></span></p>';
 		}
 		nodo_comentarios_realiazados.innerHTML=comentarios_realizados;
 	}
@@ -259,6 +261,8 @@ function foormatear_comentarios()
 	{
 		document.getElementById("comenta").innerHTML="<h4 style='color:red;'>Se el primero en comentar.</h4>";
 	}
+
+	llevar_al_comentario();
 }
 
 function puede_comentar()
@@ -311,4 +315,10 @@ function enviar_comentario()
 	zoom_activo(2,"Enviando comentario, tenga paciencia por favor.");
 	peticionAJAX_POST_enviar_comentario();
 	return false;
+}
+
+function llevar_al_comentario()
+{
+	if(comentario_ancla != null)
+	location.href = comentario_ancla;
 }

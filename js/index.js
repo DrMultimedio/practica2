@@ -141,7 +141,7 @@ function foormatear_comentarios(b)
 		//fin de la asignacion
 		//la publicamos
 		articulo2=document.createElement("p");
-		articulo2.innerHTML="<span>"+usuc+" -> </span>"+texto+"<span class='fecha_comentarios'><time datetime='"+fecha+"'>"+fecha+"</time></span>";
+		articulo2.innerHTML="<span>"+usuc+" -> </span>"+texto+"<span class='fecha_comentarios'><a href='viaje.html?id="+idv+"#comentario"+idc+"'>Ir</a><time datetime='"+fecha+"'>"+fecha+"</time></span>";
 		nodo2.appendChild(articulo2);
 	}
 	console.log("monstrando comentarios");
