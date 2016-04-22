@@ -4,6 +4,7 @@ var viaje="";
 var comenta="";
 var fotos="";
 var comentario_ancla="";
+var puede_hacer_comentarios=false;//por defecto ponemos que no puede hacer comentario
 function arranque_personalizado()
 {
 	console.log("ejecutando arranque personalizado para viajes, vamos a recuperar el id del viaje");
@@ -256,7 +257,14 @@ function foormatear_comentarios()
 		comentarios_realizados="";
 		for(a=0;a < comenta.FILAS.length;a++) 
 		{
-			comentarios_realizados=comentarios_realizados+'<p id="comentario'+comenta.FILAS[a].ID+'"><span>'+comenta.FILAS[a].LOGIN+'</span><b>'+comenta.FILAS[a].TITULO+'</b> '+comenta.FILAS[a].TEXTO+'<span class="fecha_comentarios"><time datetime="'+comenta.FILAS[a].FECHAHORA+'">'+comenta.FILAS[a].FECHAHORA+'</time></span></p>';
+			if(puede_hacer_comentarios)
+			{
+				comentarios_realizados=comentarios_realizados+'<p id="comentario'+comenta.FILAS[a].ID+'"><span>'+comenta.FILAS[a].LOGIN+'</span><b>'+comenta.FILAS[a].TITULO+'</b> '+comenta.FILAS[a].TEXTO+'<span class="fecha_comentarios"><time datetime="'+comenta.FILAS[a].FECHAHORA+'">'+comenta.FILAS[a].FECHAHORA+'</time></span></p><button type="button" onclick="responder(&#39;'+comenta.FILAS[a].TITULO+'&#39;);">Responder</button>';
+			}
+			else
+			{
+				comentarios_realizados=comentarios_realizados+'<p id="comentario'+comenta.FILAS[a].ID+'"><span>'+comenta.FILAS[a].LOGIN+'</span><b>'+comenta.FILAS[a].TITULO+'</b> '+comenta.FILAS[a].TEXTO+'<span class="fecha_comentarios"><time datetime="'+comenta.FILAS[a].FECHAHORA+'">'+comenta.FILAS[a].FECHAHORA+'</time></span></p>';				
+			}				
 		}
 		nodo_comentarios_realiazados.innerHTML=comentarios_realizados;
 	}
@@ -278,11 +286,13 @@ function puede_comentar()
 		if(sessionStorage.getItem("login_session"))
 		{
 			console.log("puede comentar");
+			puede_hacer_comentarios=true;
 			document.getElementById('campo_comentario').style.display='block';
 		}
 		else
 		{
 			console.log("no puede comentar");
+			puede_hacer_comentarios=false;
 			document.getElementById('campo_comentario').style.display='none';
 		}
 	}
@@ -325,4 +335,10 @@ function llevar_al_comentario()
 {
 	if(comentario_ancla != null)
 	location.href = comentario_ancla;
+}
+
+function responder(titul)
+{
+	document.getElementById("titulo_en").value="RE:"+titul;
+	document.getElementById("coment_en").focus();
 }
