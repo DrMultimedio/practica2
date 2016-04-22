@@ -126,6 +126,10 @@ function procesarCambio()
 			// Aquí se procesa lo que se haya devuelto:
 			console.log("se ha terminado la carga de datos del viaje -> devolviendo");//devolvemos mensaje por log
 			viaje=JSON.parse(obj.responseText);//creamos el objeto datos con los datos parseados
+			if(viaje.FILAS.length == 0)
+			{
+				location.href="index.html";
+			}
 			foormatear_viaje();//mostramos la informacion del viaje
 		}
 		else 
