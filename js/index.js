@@ -75,8 +75,8 @@ function procesarCambio2()//procesar cambio para comentarios
 //arranque para el index
 function arranque_personalizado()
 {
-	peticionAJAX_GET("/practica2/rest/get/viaje.php?prm&u=6");//conexion para los comentarios [funcional]
-	peticionAJAX_GET2("/practica2/rest/get/comentario.php?prm=usu2&u=10");//conexion para las entradas [funcional]
+	peticionAJAX_GET("/practica2/rest/viaje/?u=6");//conexion para los comentarios [funcional]
+	peticionAJAX_GET2("/practica2/rest/comentario/?u=10");//conexion para las entradas [funcional]
 }
 
 //mostrar datos en section [funcional]

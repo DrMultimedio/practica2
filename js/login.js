@@ -53,7 +53,7 @@ function peticionAJAX_POST(url)
 		// Si se ha creado el objeto, se completa la petición ...
 		// Argumentos:
 		console.log("se empieza a procesar la peticion");
-		if(url == "/practica2/rest/post/login.php")
+		if(url == "/practica2/rest/login/")
 		{
 			console.log("la peticion es de caracter login");
 			var login = document.getElementById("userlogin").value;
