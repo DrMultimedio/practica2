@@ -1,9 +1,10 @@
 var es_des=0;//numero de estrellas desde
 var es_has=0;//numero de estrellas hasta
-var pagina=0;//guardamos en que pagina estamos
+var pagina=1;//guardamos en que pagina estamos
 var campos="";//guardamos los campos recogidos
 var resultado="";//almacenamos el resultado de la busqueda
 var tipo_busqueda=1;//tipo de busqueda por defecto es global
+var posicion="pag=0&lpag=3";//por defecto la pagina sera esta
 
 function run_p()
 {
@@ -75,25 +76,27 @@ function buscar()
 
 		if(es_valida_la_fecha(desde) && desde != "")
 		{
+			fe_array=desde.split("/");
 			if(campos == "?")
 			{
-				campos=campos+"fi="+desde;
+				campos=campos+"fi="+fe_array[2]+"-"+fe_array[1]+"-"+fe_array[0];
 			}
 			else
 			{
-				campos=campos+"&fi="+desde;	
+				campos=campos+"&fi="+fe_array[2]+"-"+fe_array[1]+"-"+fe_array[0];	
 			}
 		}
 
 		if(es_valida_la_fecha(hasta) && hasta != "")
 		{
+			fe_array=hasta.split("/");
 			if(campos == "?")
 			{
-				campos=campos+"ff="+hasta;
+				campos=campos+"ff="+fe_array[2]+"-"+fe_array[1]+"-"+fe_array[0];
 			}
 			else
 			{
-				campos=campos+"&ff="+hasta;	
+				campos=campos+"&ff="+fe_array[2]+"-"+fe_array[1]+"-"+fe_array[0];	
 			}	
 		}
 
@@ -120,6 +123,9 @@ function buscar()
 				campos=campos+"&&vf="+es_has;	
 			}
 		}
+
+		pagina=1;
+		posicion="pag=0&lpag=3";
 		peticionAJAX_GET();
 	}
 	else
@@ -127,11 +133,13 @@ function buscar()
 		campos="?n="+titulo+"&d="+descrip+"";
 		if(es_valida_la_fecha(desde))
 		{
-			campos=campos+"&fi="+desde;
+			fe_array=desde.split("/");
+			campos=campos+"&fi="+fe_array[2]+"-"+fe_array[1]+"-"+fe_array[0];
 		}
 		if(es_valida_la_fecha(hasta))
 		{
-			campos=campos+"&ff="+hasta;	
+			fe_array=hasta.split("/");
+			campos=campos+"&ff="+fe_array[2]+"-"+fe_array[1]+"-"+fe_array[0];	
 		}
 	}
 	return false;
@@ -204,7 +212,14 @@ function peticionAJAX_GET()
 		// Si se ha creado el objeto, se completa la petición ...
 		// Se establece la función (callback) a la que llamar cuando cambie el estado:
 		obj.onreadystatechange= procesarCambio; // función callback: procesarCambio para viaje
-		obj.open("GET","/practica2/rest/viaje/"+campos, true); // Se crea petición GET a url, asincrona ("true")
+		if(campos != "?")
+		{
+			obj.open("GET","/practica2/rest/viaje/"+campos+"&"+posicion, true); // Se crea petición GET a url, asincrona ("true")
+		}
+		else
+		{
+			obj.open("GET","/practica2/rest/viaje/"+posicion, true);	
+		}
 		obj.send(); // Se envia la petición
 	}
 }
@@ -220,7 +235,27 @@ function procesarCambio()
 			// Aqui se procesa lo que se haya devuelto:
 			console.log("se ha terminado la carga de datos de la busqueda -> devolviendo");//devolvemos mensaje por log
 			resultado=JSON.parse(obj.responseText);//creamos el objeto datos con los datos parseados
-			alert(obj.responseText);
+			if(resultado.TOTAL_COINCIDENCIAS == 0)
+			{
+					nodo=document.getElementById("entradas");//nodo section de index
+					while(nodo.hasChildNodes())//con esto eliminamos todos los comentarios que hayan antes
+					{
+						nodo.removeChild(nodo.firstChild);	
+				 	}
+				 	if(document.getElementById("paginacion"))
+				 	{
+				 		paginacion=document.getElementById("paginacion");
+						while(paginacion.hasChildNodes())//con esto eliminamos todos los comentarios que hayan antes
+						{
+							paginacion.removeChild(paginacion.firstChild);	
+					 	}
+				 	}
+				 	nodo.innerHTML="<h4 style='color:red;'>No se han encontrado coincidencias</h4>";
+			}
+			else
+			{
+				foormatear_entradas(resultado);
+			}
 		}
 		else 
 		{
@@ -238,4 +273,89 @@ function es_valida_la_fecha(fecha_a_comprobar)
 		return true;
 	}
 	return false;*/
+}
+
+//mostrar datos en section [funcional]
+function foormatear_entradas(a)
+{
+	nodo=document.getElementById("entradas");//nodo section de index
+	while(nodo.hasChildNodes())//con esto eliminamos todos los comentarios que hayan antes
+	{
+		nodo.removeChild(nodo.firstChild);	
+ 	}
+	//vamos a contar cuantos viajes hay
+	contador=0;//nos servira para saber si se ha dado algun resultado
+	for (var i = a.FILAS.length - 1; i >= 0; i--) 
+	{
+		//asignamos las datos a variables mas simples
+		titulo = a.FILAS[i].NOMBRE;	
+		descripcion = a.FILAS[i].DESCRIPCION;
+		idp= a.FILAS[i].ID;
+		usu= a.FILAS[i].LOGIN;
+		valoracion = a.FILAS[i].VALORACION;
+		foto = a.FILAS[i].FOTO;
+		des = a.FILAS[i].DESCRIPCION_FOTO;
+		feinicio = a.FILAS[i].FECHA_INICIO;
+		//fin de la asignacion
+		//la publicamos
+		articulo=document.createElement("article");
+		valor4="";
+		valor4=valor4+"<header><h4>"+titulo+"</h4></header><div class = 'hoveroculto'><img src='fotos/"+idp+"/"+foto+"' alt='"+des+"'/><span><p>"+descripcion+"</p><a href='viaje.html?id="+idp+"'><b>Seguir Leyendo</b>&nbsp;-></a></span></div><br/>";
+		valor4=valor4+"<div class='valoracion'>";
+		for(h=1;h <= 5;h++)
+		{
+			if(h <= valoracion)
+			{
+				valor4=valor4+"<span class='icon-star' style='color:red;'></span>";	
+			}
+			else
+			{
+				valor4=valor4+"<span class='icon-star'></span>";
+			}
+		}
+		valor4=valor4+"</div><br/><footer><h6>Autor:"+usu+", Fecha de edicion:<time datetime='2016'>"+feinicio+"</time></h6></footer>";
+		articulo.innerHTML=valor4;
+		nodo.appendChild(articulo);
+		console.log("monstrando entradas");
+		contador++;
+	}
+
+	//aqui crearemos la paginacion
+	if(contador != 0)
+	{
+		if(!document.getElementById("paginacion"))
+		{
+			paginacion=document.createElement("div");
+			paginacion.id="paginacion";
+			paginacion.style="text-align:center;";
+		}
+		else
+		{
+			paginacion=document.getElementById("paginacion");
+			while(paginacion.hasChildNodes())//con esto eliminamos todos los comentarios que hayan antes
+			{
+				paginacion.removeChild(paginacion.firstChild);	
+		 	}
+		}
+
+		for(g=1;g <= (resultado.TOTAL_COINCIDENCIAS/3);g++)
+		{
+			if(g == pagina)
+			{
+				paginacion.innerHTML=paginacion.innerHTML+"<span style='text-decoration:none;'>"+g+"</span>&nbsp;";
+			}
+			else
+			{
+				paginacion.innerHTML=paginacion.innerHTML+"<span style='text-decoration:underline;' onclick='cambiar_de_pagina("+g+")'>"+g+"</span>&nbsp;";
+			}
+		}
+		document.getElementById("main_entradas").appendChild(paginacion);
+	}
+}
+
+function cambiar_de_pagina(numero)
+{
+	posicion="pag="+(numero-1)+"&lpag=3";
+	pagina=numero;
+	peticionAJAX_GET();
 }
