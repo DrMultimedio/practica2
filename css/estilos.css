@@ -300,9 +300,14 @@ article .valoracion span:hover ~ span{
 	max-width:200px;
 }
 /*mensajes de validación*/
-#no{
+.error{
 	transition:0.1s;
-	color:#D60D0D;
+	color:#FE2F2F;
+	display:none;
+}
+.correcto{
+	transition:0.1s;
+	color:#77FB83;
 	display:none;
 }
 #maxTam{
