@@ -20,6 +20,16 @@ function arranque_reg()
 		{
 			//si esta logueado
 			//algo haremos, pero no aún
+			//HA LLEGADO LA HORA
+			document.getElementById("userregis").value = "user4"
+			document.getElementById("userregis").disabled = true
+			document.getElementById("nombre_user").value = "Willyres"
+			document.getElementById("email").value = "Willy@rex.com"
+			document.getElementById("password").required = false;
+			document.getElementById("password2").required = false;
+
+
+
 
 		}
 }
@@ -35,7 +45,7 @@ function peticionAJAX_POST(){//peticion ajax para crear un usuario
 		var nombre = document.getElementById("nombre_user").value;
 		var email = document.getElementById("email").value;
 		var foto =  document.querySelector('input[type=file]').files[0];
-        var args = "login=" + usu + "&pwd=" + pwd + "&pw2=" + pw2 +"&nombre=" + nombre + "&email=" + email + "&foto=" + foto;
+        var args = "login=" + usu + "&pwd=" + pwd + "&pwd2=" + pw2 +"&nombre=" + nombre + "&email=" + email + "&foto=" + foto;
       	alert(args);	
 		obj3.onreadystatechange = procesarCambio3;
 		obj3.open("POST", url, true);
@@ -67,11 +77,12 @@ function peticionAJAX_GET2()//peticion para ajax de comentarios
 }
 function procesarCambio3(){ //finalmente, registramos el usuario
 
-   	alert("BIBA WILLIRES");	
 
 	if(obj3.readyState == 4){
+		   	alert("BIBA WILLIRES");	
+
 		// valor 4: respuesta recibida y lista para ser procesada
-		if(obj2.status == 200){
+		if(obj3.status == 200){
 			alert(obj3.responseText);
 		}
 
@@ -102,7 +113,6 @@ function procesarCambio2(){
 function envio()
 {
 	
-	var file    = document.querySelector('input[type=file]').files[0];
 	var file    = document.querySelector('input[type=file]').files[0];
 	ok=true;
 	if(!comparaPassword())
