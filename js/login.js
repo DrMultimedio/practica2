@@ -134,5 +134,6 @@ function compro_recordar()
 		user=JSON.parse(localStorage.getItem("login_local"));
 		document.getElementById("userlogin").value=user.LOGIN;
 		document.getElementById("recordar").checked=true;
+		document.getElementById("password").focus();
 	}
 }
