@@ -1,4 +1,5 @@
 var valora=0;
+var id_del_viaje=0;
 
 function arranque_per(){
 	if(!sessionStorage.getItem("login_session"))
@@ -117,6 +118,35 @@ function peticionAJAX_POST(){//peticion ajax para crear un usuario
 	}
 }
 
+function peticionAJAX_POST2(){//peticion ajax para crear un usuario
+	url = "rest/foto/";
+	obj3 = crearObjAjax();
+	if(obj3)
+	{
+		var fd = new FormData();//formdata agrupa los datos segun clave/valor y los interpreta en el php como las variables de siempre [clave]
+		var ti = document.getElementById("titulo").value;
+		var fh = document.getElementById("fecha_hasta").value;
+		var fde = document.getElementById("fecha_desde").value;
+		var des = document.getElementById("descripcion").value;
+		//var foto =  document.querySelector('input[type=file]').files[0];
+		if(sessionStorage.getItem("login_session"))
+		{
+				fd.append("clave",JSON.parse(sessionStorage.getItem("login_session")).CLAVE);
+				fd.append("login",JSON.parse(sessionStorage.getItem("login_session")).LOGIN);		
+		}
+		fd.append("nombre",ti);//asi agregamos el valor y el nombre de la variable
+		fd.append("descripcion",des);
+		fd.append("fi",fh);
+		fd.append("ff",fde);
+		fd.append("v",valora);
+		obj3.onreadystatechange = procesarCambio3;
+		obj3.open("POST", url, true);
+		//obj3.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); no nos hace falta con formdata
+		obj3.send(fd);//enviamos el formdata
+	}
+}
+
+
 function procesarCambio3(){ //finalmente, registramos el usuario
 
 
@@ -125,9 +155,9 @@ function procesarCambio3(){ //finalmente, registramos el usuario
 		if(obj3.status == 200)
 		{
 			ver=JSON.parse(obj3.responseText);
-			alert(obj3.responseText);
 			if(ver.RESULTADO == "ok")
 			{
+				zoom_activo("nada");
 				//en este punto subiriamos las fotos
 			}
 			
@@ -135,4 +165,30 @@ function procesarCambio3(){ //finalmente, registramos el usuario
 
 	}
 
+}
+
+function zoom_activo(texto) //cuando te registras correctamente la ventana se oscurece y tal
+{
+	ventana = document.getElementById('zoo');
+	mensaje = document.getElementById('mensaje');
+	if(!ventana.classList.contains('zoom_visible'))
+	{
+		subir();
+		if(texto == "nada")
+		{
+			mensaje.innerHTML = "<h2 style='color:green;'>"+"Ya se ha creado su viaje, sera redireccionado al index."+"</h2>";
+		}
+		ventana.classList.add('zoom_visible');
+		document.body.classList.add('bloqueo');
+		if(texto == "nada")
+		{
+			setTimeout("redireccion_index()",3*1000);
+		}
+	}
+}
+
+//redireccionamos al login
+function redireccion_index()
+{
+	document.location.href="index.html";
 }
