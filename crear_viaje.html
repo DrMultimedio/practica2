@@ -39,7 +39,7 @@
 				<h1>Crea tu viaje</h1>
 			</header>
 			<p>Aquí podrás crear tu viaje.</p>
-			<form id="crear_viaje">
+			<form id="crear_viaje" onsubmit="envio();">
 				<label for="titulo">Título:</label><br/><input type="text" name="titulo" id="titulo"  class="input" required title="Necesita un título" pattern="^[a-z0-9_-]{3,200}$" />
 				<br/>			
 				<label for="fecha_desde">Fecha desde:</label><br/><input type="text" title="DD/MM/AAAA" placeholder="DD/MM/AAAA" name="fecha_desde" id="fecha_desde"  class="input" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$" required="" />
@@ -52,14 +52,16 @@
 				<br>
 				<div id="crearviaje_cont_img" class="imagenesviaje"> 
 
-					<label for="subir">Subir imagen:</label><br/><input type="file" name="subir" id="subir">
+					<label for="subir">Subir imagen:</label><br/><input type="file" name="subir" id="subir" onchange="	previsualizar()">
+					<p id="archivo_muy_grande_viaje" class = "error"> El archivo no debe superar 2 MB<br> </p>	
+
 					<br/>
 					<input name="borrar" type="button" onclick="borrar_foto(this.parentNode);" value="Borrar foto" /> 
 
 					<br/>
-					<label for="descripcionfoto">Descripción:</label><br/><textarea name="descripcionfoto" id="descripcionfoto"  class="input"></textarea>
+					<label for="descripcionfoto">Descripción:</label><br/><textarea name="descripcionfoto" id="descripcionfoto"  class="input" ></textarea>
 
-					<img src="img/prueba2.jpg"> <br> 
+					<img src="img/prueba2.jpg" id="fotoviaje1"> <br> 
 
 				</div>
 				<br>

@@ -157,10 +157,11 @@ article > header > h4
 } 
 
 /*Estilos de contenedores especiale*/
-
+.archivo_muy_grande_viaje{
+	display:none;
+}
 /*Este estilo sirve para cuando se sube una imagen en crear viaje*/
 #crearviaje_cont_img{
-	display: none;
 }
 
 .imagenesviaje> img{
