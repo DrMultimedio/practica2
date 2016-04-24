@@ -39,7 +39,7 @@
 				<h1>Crea tu viaje</h1>
 			</header>
 			<p>Aquí podrás crear tu viaje.</p>
-			<form id="crear_viaje" onsubmit="envio();">
+			<form id="crear_viaje" onsubmit="return envio();">
 				<label for="titulo">Título:</label><br/><input type="text" name="titulo" id="titulo"  class="input" required title="Necesita un título" pattern="^[a-z0-9_-]{3,200}$" />
 				<br/>			
 				<label for="fecha_desde">Fecha desde:</label><br/><input type="text" title="DD/MM/AAAA" placeholder="DD/MM/AAAA" name="fecha_desde" id="fecha_desde"  class="input" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$" required="" />
@@ -67,12 +67,12 @@
 				<br>
 				Valoración<br/>
 				<div class="valoracion">
-					<aside class="estrellas">
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
+					<aside class="estrellas" id="valoraciones">
+						<span class="icon-star" onclick="valorac(1);"></span>
+						<span class="icon-star" onclick="valorac(2);"></span>
+						<span class="icon-star" onclick="valorac(3);"></span>
+						<span class="icon-star" onclick="valorac(4);"></span>
+						<span class="icon-star" onclick="valorac(5);"></span>
 					</aside>
 				</div>
 
