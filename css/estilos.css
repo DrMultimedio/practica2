@@ -159,9 +159,11 @@ article > header > h4
 /*Estilos de contenedores especiale*/
 
 /*Este estilo sirve para cuando se sube una imagen en crear viaje*/
+#crearviaje_cont_img{
+	display: none;
+}
 
-
-.crearviaje_cont_img> img{
+.imagenesviaje> img{
 	width:50px;
 	height:50px;
 	display:inline-block;

@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="/practica2/js/funciones_genericas.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
-<body onload="arranque();">
+<body onload="arranque(); arranque_per();">
 	<input type="checkbox" class="checkbox" id="menu-toogle"/>
 	<label for="menu-toogle"><span></span></label>
 	<div id="banner">
@@ -39,7 +39,7 @@
 				<h1>Crea tu viaje</h1>
 			</header>
 			<p>Aquí podrás crear tu viaje.</p>
-			<form>
+			<form id="crear_viaje">
 				<label for="titulo">Título:</label><br/><input type="text" name="titulo" id="titulo"  class="input" required title="Necesita un título" pattern="^[a-z0-9_-]{3,200}$" />
 				<br/>			
 				<label for="fecha_desde">Fecha desde:</label><br/><input type="text" title="DD/MM/AAAA" placeholder="DD/MM/AAAA" name="fecha_desde" id="fecha_desde"  class="input" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$" required="" />
@@ -48,17 +48,21 @@
 				<br/>
 				<label for="descripcion">Descripción:</label><br/><textarea name="descripcion" id="descripcion"  class="input" required ></textarea>
 				<br/>
-				<div class="crearviaje_cont_img"> 
-					<label for="subir">Subir imágenes:</label><br/><input type="file" name="subir" id="subir">
+				<input name="showsubirfoto" type="button" onclick="subir_foto();" value="Subir fotos" /> 
+				<br>
+				<div id="crearviaje_cont_img" class="imagenesviaje"> 
+
+					<label for="subir">Subir imagen:</label><br/><input type="file" name="subir" id="subir">
 					<br/>
-					<input type="submit" value="Subir foto"/>
+					<input name="borrar" type="button" onclick="borrar_foto(this.parentNode);" value="Borrar foto" /> 
+
 					<br/>
-					<img src="img/prueba2.jpg"> 
-					<img src="img/prueba2.jpg"> 
-					<img src="img/prueba2.jpg">
-					<img src="img/prueba2.jpg">
+					<label for="descripcionfoto">Descripción:</label><br/><textarea name="descripcionfoto" id="descripcionfoto"  class="input"></textarea>
+
+					<img src="img/prueba2.jpg"> <br> 
 
 				</div>
+				<br>
 				Valoración<br/>
 				<div class="valoracion">
 					<aside class="estrellas">
